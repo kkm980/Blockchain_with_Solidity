@@ -6,10 +6,25 @@ contract CRUD{
     struct employee {
 	   string name;
 	   string email;
-	   uint age;
+	   uint256 age;
 	   address wallet;
     }
 
     employee[] public employees;
+
+    uint256 public totalEmployees;
+
+    constructor(){
+        totalEmployees=0;
+    }
+
+    function createEmployee(string memory name, string memory email, uint256 age, address wallet) public returns(uint256 _totalEmployees){
+       employee memory new_employee = employee(name, email, age, wallet);
+       employees.push(new_employee);
+       totalEmployees++;
+       return totalEmployees;
+    }
+
+   
 
 }
