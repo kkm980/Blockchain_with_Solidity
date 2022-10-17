@@ -7,20 +7,31 @@
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  // const currentTimestampInSeconds = Math.round(Date.now() / 1000);
+  // const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
+  // const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
+  // const lockedAmount = hre.ethers.utils.parseEther("1");
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  const CRUD = await hre.ethers.getContractFactory("CRUD");
+  const crud = await CRUD.deploy();
 
-  await lock.deployed();
+  await crud.deployed();
+  
+  console.log(crud.address, "this is deployed address of CRUD application.")
+
+
 
   console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+    `CRUD app deployed to ${crud.address}`
   );
+
+  const createResponse=await crud.createEmployee
+  (
+    'Krishna Kant Mishra', 'krishnakantmishra980@gmail.com', 27, '0x5FbDB2315678afecb367f032d93F642f64180aa3'
+  );
+
+  console.log(createResponse, "this is response of createEmployee");
 }
 
 // We recommend this pattern to be able to use async/await everywhere
