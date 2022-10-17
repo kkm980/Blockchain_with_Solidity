@@ -18,20 +18,25 @@ async function main() {
 
   await crud.deployed();
   
-  console.log(crud.address, "this is deployed address of CRUD application.")
+  // console.log(crud.address, "this is deployed address of CRUD application.")
 
 
 
-  console.log(
-    `CRUD app deployed to ${crud.address}`
-  );
+  // console.log(
+  //   `CRUD app deployed to ${crud.address}`
+  // );
 
-  const createResponse=await crud.createEmployee
+
+  const initial_employee_number=await crud.totalEmployees();
+
+  const create_response=await crud.createEmployee
   (
     'Krishna Kant Mishra', 'krishnakantmishra980@gmail.com', 27, '0x5FbDB2315678afecb367f032d93F642f64180aa3'
   );
-
-  console.log(createResponse, "this is response of createEmployee");
+  const new_employee_number=await crud.totalEmployees();
+  const first_employee=crud.employees(0);
+  console.log(initial_employee_number, new_employee_number, first_employee);
+  // console.log(createResponse, "this is response of createEmployee");
 }
 
 // We recommend this pattern to be able to use async/await everywhere
