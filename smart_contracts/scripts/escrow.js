@@ -10,7 +10,7 @@ async function main() {
   await escrow.deployed();
   await escrow.connect(payer).deposit({value:10000});
   await escrow.connect(payee).submitWork();
-  const contract_balance=await escrow.balanceOf()
+  const contract_balance=await escrow.balanceOf();
   console.log(
     `escrow contract deployed to ${escrow.address}`
   );
